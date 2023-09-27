@@ -1,4 +1,4 @@
-import instance, { ResType } from '../../../service/ajax'
+import instance from '../../../service/ajax'
 
 export type SearchType = {
   keyword: string
@@ -10,11 +10,11 @@ export type SearchType = {
 
 // 获取问卷列表
 export const getQuestionList = async (
-  searchParams: Partial<SearchType>
-): Promise<ResType> => {
+  searchParams: Partial<SearchType> = {}
+) => {
   const url = '/api/question'
-  const data = (await instance.get(url, {
+  const data = await instance.get(url, {
     params: searchParams
-  })) as ResType
+  })
   return data
 }

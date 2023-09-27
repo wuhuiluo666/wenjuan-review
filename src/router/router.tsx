@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { MainLayout } from '../layouts/MainLayout'
 import { Home } from '../pages/Home'
 import { ManageLayout } from '../layouts/ManageLayout'
-import { List } from 'antd'
+import { List } from '../pages/ManageQuestion/list'
 import { Star } from '../pages/ManageQuestion/star'
 import { Trash } from '../pages/ManageQuestion/trash'
 

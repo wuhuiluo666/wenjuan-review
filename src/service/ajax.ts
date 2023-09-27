@@ -6,7 +6,7 @@ export type DataType = {
 }
 
 export type ResType = {
-  error: number
+  error?: number
   data?: DataType
 }
 
