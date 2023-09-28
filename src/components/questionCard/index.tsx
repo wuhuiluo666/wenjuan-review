@@ -5,6 +5,7 @@ import { useRequest } from 'ahooks'
 import { Space, Button, Divider, Tag, Popconfirm, Modal, message } from 'antd'
 import { CopyOutlined, DeleteOutlined, EditOutlined, ExclamationCircleOutlined, LineChartOutlined, StarOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
+import { changeStarState, copyQuestion } from '../../pages/api/question/question'
 
 
 interface QuestionCard {
@@ -18,21 +19,21 @@ interface QuestionCard {
 
 const QuestionCard = (props: QuestionCard) => {
     const nav = useNavigate()
-    // const [isDeleted, setIsDeleted] = useState(false)
+    const [isDeleted, setIsDeleted] = useState(false)
     const { _id, title, isPublished, isStar, answerCount, createdAt } = props
-    // const [starState, setStarState] = useState(isStar)
-    // 标星
-    // const { run: changeStar, loading: changeStarLoading } = useRequest(async () => {
-    //     await changeQuestionStar(_id, {
-    //         isStar: !starState
-    //     })
-    // }, {
-    //     manual: true,
-    //     onSuccess: () => {
-    //         setStarState(!starState)
-    //         message.success('修改成功')
-    //     }
-    // })
+    const [starState, setStarState] = useState(isStar)
+    // 标星问卷
+    const { run: changeStar, loading: changeStarLoading } = useRequest(async () => {
+        await changeStarState(_id, {
+            isStar: !starState
+        })
+    }, {
+        manual: true,
+        onSuccess: () => {
+            setStarState(!starState)
+            message.success('操作成功')
+        }
+    })
     // // 删除问卷
     // const { run: deleteQuestion, loading: deleteLoading } = useRequest(async () => {
     //     await changeQuestionStar(_id, {
@@ -52,6 +53,17 @@ const QuestionCard = (props: QuestionCard) => {
     //         onOk: deleteQuestion
     //     })
     // }
+    // 复制问卷
+    const { run: copy, loading: copyLoading } = useRequest(async () => {
+        const data = await copyQuestion(_id)
+        return data
+    }, {
+        manual: true,
+        onSuccess: (res: any) => {
+            nav(`/question/edit/${res.id}`)
+            message.success('复制成功')
+        }
+    })
     // // 复制
     // const { run: copy, loading: copyLoading } = useRequest(async () => await copyQuestion(_id), {
     //     manual: true,
@@ -67,7 +79,7 @@ const QuestionCard = (props: QuestionCard) => {
                 {/* 已发布跳统计 未发布跳编辑 */}
                 <Link to={isPublished ? `/question/static/${_id}` : `/question/edit/${_id}`}>
                     <Space>
-                        {/* {starState && <StarOutlined style={{ color: 'red' }} />} */}
+                        {starState && <StarOutlined style={{ color: 'red' }} />}
                         {title}
                     </Space>
                 </Link>
@@ -94,8 +106,8 @@ const QuestionCard = (props: QuestionCard) => {
             </div>
             <div className={styles.right}>
                 <Space>
-                    <Button icon={<StarOutlined />} size={'small'} type={'text'}>
-                        111
+                    <Button onClick={changeStar} disabled={changeStarLoading} icon={<StarOutlined />} size={'small'} type={'text'}>
+                        {starState ? <span>取消标星</span> : <span>标星</span>}
                     </Button>
                     <Popconfirm
                         title={'确定要复制问卷吗?'}

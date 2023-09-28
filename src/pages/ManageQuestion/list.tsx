@@ -5,10 +5,13 @@ import styles from './common.module.scss'
 import { Empty, Spin, Typography } from 'antd'
 import QuestionCard from '../../components/questionCard'
 import { InputSearch } from '../../components/inputSearch'
+import { useSearchParams } from 'react-router-dom'
 
 const PAGE_SIZE = 10
 
 export const List = () => {
+    const [started,setStarted] = useState(true)
+    const [searchParams] = useSearchParams()
     const [page, setPage] = useState(1)
     const [total, setTotal] = useState(0)
     const [questionList, setQuestionList] = useState([])
@@ -17,7 +20,8 @@ export const List = () => {
     const { run: loadQuestionList, loading } = useRequest(async () => {
         const data = await getQuestionList({
             page,
-            pageSize: 10
+            pageSize: 10,
+            keyword: searchParams.get('keyword') || ''
         })
         return data
     }, {
@@ -38,16 +42,24 @@ export const List = () => {
         const scrollHeight = document.body.scrollHeight
         if (scrollHeight <= clientHeight + scrollTop) {
             loadQuestionList()
+            setStarted(false)
         }
-    })
+    },
+        {
+            wait: 500
+        })
     // 一进入页面请求列表数据
     useEffect(() => {
-        loadQuestionList()
-    }, [])
+        setQuestionList([])
+        setStarted(true)
+        setPage(1)
+        setTotal(0)
+        debounceLoadQuestionList()
+    }, [searchParams])
     // 控制滑动时请求次数，并且监听page变化时在重新触发,一进入的时候是0
+    // 只有在page改变的时候加载并且触底才会加载
     useEffect(() => {
         if (hasMoreData) {
-            console.log('sss111', hasMoreData)
             window.addEventListener('scroll', debounceLoadQuestionList)
         }
         return () => {

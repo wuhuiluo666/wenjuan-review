@@ -18,3 +18,20 @@ export const getQuestionList = async (
   })
   return data
 }
+
+// 标星问卷
+export const changeStarState = async (
+  id: string,
+  options: { [key: string]: any }
+) => {
+  const url = `/api/question/${id}`
+  const data = await instance.patch(url, options)
+  return data
+}
+
+// 复制问卷
+export const copyQuestion = async (id: string) => {
+  const url = `/api/question/copy/${id}`
+  const data = await instance.post(url)
+  return data
+}
