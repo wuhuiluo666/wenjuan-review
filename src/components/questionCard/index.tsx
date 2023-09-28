@@ -34,25 +34,25 @@ const QuestionCard = (props: QuestionCard) => {
             message.success('操作成功')
         }
     })
-    // // 删除问卷
-    // const { run: deleteQuestion, loading: deleteLoading } = useRequest(async () => {
-    //     await changeQuestionStar(_id, {
-    //         isDeleted: true
-    //     })
-    // }, {
-    //     manual: true,
-    //     onSuccess: () => {
-    //         setIsDeleted(true)
-    //         message.success('删除成功')
-    //     }
-    // })
-    // const deleteConfirm = () => {
-    //     Modal.confirm({
-    //         title: '确认要删除问卷吗?',
-    //         icon: <ExclamationCircleOutlined />,
-    //         onOk: deleteQuestion
-    //     })
-    // }
+    // 删除我呢卷
+    const { run: deleteQuestion, loading: deleteLoading } = useRequest(async () => {
+        await changeStarState(_id, {
+            isDeleted: true
+        })
+    }, {
+        manual: true,
+        onSuccess: () => {
+            setIsDeleted(true)
+            message.success('删除成功')
+        }
+    })
+    const deleteConfirm = () => {
+        Modal.confirm({
+            title: '确认要删除问卷吗?',
+            icon: <ExclamationCircleOutlined />,
+            onOk: deleteQuestion
+        })
+    }
     // 复制问卷
     const { run: copy, loading: copyLoading } = useRequest(async () => {
         const data = await copyQuestion(_id)
@@ -64,15 +64,7 @@ const QuestionCard = (props: QuestionCard) => {
             message.success('复制成功')
         }
     })
-    // // 复制
-    // const { run: copy, loading: copyLoading } = useRequest(async () => await copyQuestion(_id), {
-    //     manual: true,
-    //     onSuccess: (result) => {
-    //         nav(`/question/edit/${result.id}`)
-    //         message.success("复制成功")
-    //     }
-    // })
-    // if (isDeleted) return null
+    if (isDeleted) return null
     return <div key={_id} className={styles.container}>
         <div className={styles.title}>
             <div className={styles.left}>
@@ -113,13 +105,13 @@ const QuestionCard = (props: QuestionCard) => {
                         title={'确定要复制问卷吗?'}
                         okText={'确定'}
                         cancelText={'取消'}
-                    // onConfirm={copy}
+                        onConfirm={copy}
                     >
                         <Button icon={<CopyOutlined />} size={'small'} type={'text'}>
                             复制
                         </Button>
                     </Popconfirm>
-                    <Button icon={<DeleteOutlined />} size={'small'} type={'text'}>删除</Button>
+                    <Button onClick={deleteConfirm} loading={deleteLoading} icon={<DeleteOutlined />} size={'small'} type={'text'}>删除</Button>
                 </Space>
             </div>
         </div>

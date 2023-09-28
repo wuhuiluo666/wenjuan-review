@@ -5,6 +5,8 @@ import { ManageLayout } from '../layouts/ManageLayout'
 import { List } from '../pages/ManageQuestion/list'
 import { Star } from '../pages/ManageQuestion/star'
 import { Trash } from '../pages/ManageQuestion/trash'
+import { QuestionLayout } from '../layouts/QuestionLayout'
+import { Edit } from '../pages/edit'
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,15 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: 'question',
+        element: <QuestionLayout />,
+        children: [{
+            path: 'edit/:id',
+            element: <Edit />
+        }
+        ]
+    }
 ])
 
 export default router
