@@ -1,8 +1,11 @@
 import React from 'react'
 import styles from './index.module.scss'
+import { useGetComponentList } from '../../hooks/useComponentList'
+import { EditCanvas } from './editCanvas'
 
 
 export const Edit = () => {
+    const { loading } = useGetComponentList()
     return <div className={styles['edit-container']}>
         <div>
             Header
@@ -15,8 +18,7 @@ export const Edit = () => {
                 </div>
                 <div className={styles.main}>
                     <div className={styles['canvas-warpper']}>
-                        {/* <EditCanvas loading={loading} /> */}
-                        Canvsa
+                        <EditCanvas loading={loading} />
                     </div>
                 </div>
                 <div className={styles.right}>
