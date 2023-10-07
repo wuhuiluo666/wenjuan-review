@@ -35,3 +35,19 @@ export const copyQuestion = async (id: string) => {
   const data = await instance.post(url)
   return data
 }
+
+// 删除问卷
+export const deleteQuestion = async (ids: string[]) => {
+  const url = '/api/question'
+  const data = await instance.delete(url, {
+    data: ids
+  })
+  return data
+}
+
+// 单个问卷组件数组
+export const getComponentList = async (id: string) => {
+  const url = `/api/question/${id}`
+  const data = await instance.get(url)
+  return data
+}

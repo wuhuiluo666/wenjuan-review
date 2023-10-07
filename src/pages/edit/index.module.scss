@@ -1,0 +1,49 @@
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+  background-color: #f0f2f4;
+}
+
+.content-wrapper {
+  flex: auto;
+  padding: 12px 0;
+}
+
+.content {
+  margin: 0 24px;
+  display: flex;
+  height: 100%;
+
+  .left {
+    width: 285px;
+    background-color: #fff;
+    padding: 0 12px;
+    overflow: auto;
+  }
+
+  .main {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    .canvas-warpper {
+      position: absolute;
+      width: 400px;
+      height: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      background-color: #fff;
+      overflow: auto;
+      box-shadow: 0 2px 5px #000;
+    }
+  }
+
+  .right {
+    width: 300px;
+    background-color: #fff;
+    padding: 0 12px;
+    overflow: auto;
+  }
+}

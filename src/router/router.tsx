@@ -6,7 +6,7 @@ import { List } from '../pages/ManageQuestion/list'
 import Star from '../pages/ManageQuestion/star'
 import { Trash } from '../pages/ManageQuestion/trash'
 import { QuestionLayout } from '../layouts/QuestionLayout'
-import { Edit } from '../pages/edit'
+import { Edit } from '../pages/Edit'
 
 const router = createBrowserRouter([
     {

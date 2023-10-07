@@ -3,11 +3,14 @@ import styles from './common.module.scss'
 import { Spin, Typography } from 'antd'
 import { InputSearch } from '../../components/inputSearch'
 import { ListPagination } from '../../components/listPagination'
+import { useFilterList } from '../../hooks/useFilterList'
+import QuestionCard from '../../components/questionCard'
 
 const { Title } = Typography
 
 
 const Star = () => {
+    const { total, list, loading } = useFilterList(true)
     return <>
         <div className={styles.header}>
             <div className={styles.left}>
@@ -18,21 +21,20 @@ const Star = () => {
             </div>
         </div>
         <div>
-            {/* {
+            {
                 loading && <Spin size={'large'} style={{ position: 'absolute', top: '50%', left: '50%' }} />
             }
             {
                 (!loading && list.length > 0) && list.map((q: any) => (
                     <QuestionCard key={q._id} {...q} />
                 ))
-            } */}
+            }
         </div>
-        <ListPagination />
-        {/* {
+        {
             !loading && <div>
                 <ListPagination total={total} />
             </div>
-        } */}
+        }
     </>
 }
 
