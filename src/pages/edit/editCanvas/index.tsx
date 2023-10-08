@@ -16,6 +16,10 @@ export const EditCanvas = ({ loading }: { loading: boolean }) => {
         const { Component } = ComponentConfig
         return <Component {...props} />
     }
+    const clickComponent = (e: MouseEvent, fe_id: string) => {
+        e.stopPropagation()
+        dispatch(changeSelectedId({ fe_id }))
+    }
     return <div className={styles.canvas}>
         {
             componentsList.map((component: ComponentProps) => {
@@ -24,9 +28,9 @@ export const EditCanvas = ({ loading }: { loading: boolean }) => {
                 const selectedComponentClassName = styles.selected
                 const ComponentClassName = className({
                     [defaultComponentClassName]: true,
-                    [selectedComponentClassName]: fe_id === selectedId
+                    [selectedComponentClassName]: fe_id == selectedId
                 })
-                return <div onClick={() => dispatch(changeSelectedId({ fe_id }))} key={fe_id} className={ComponentClassName}>
+                return <div onClick={(e: any) => clickComponent(e, fe_id)} key={fe_id} className={ComponentClassName}>
                     <div className={styles.component}>
                         {genComponent(component)}
                     </div>

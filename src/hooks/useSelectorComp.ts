@@ -6,8 +6,12 @@ export const useSelectorComponent = () => {
   const { selectedId, componentsList } = useSelector<StoreState>(
     (state) => state.components
   ) as ComponentStateProps
+  const currentComponent = componentsList.find(
+    (component) => component.fe_id === selectedId
+  )
   return {
     selectedId,
-    componentsList
+    componentsList,
+    currentComponent
   }
 }

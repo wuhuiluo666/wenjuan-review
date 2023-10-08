@@ -5,6 +5,7 @@ import { Input, Typography } from 'antd'
 export interface ComponentInputProps {
     title?: string
     placeholder?: string
+    onChange?: (data: ComponentInputProps) => void
 }
 
 export const defaultProps: ComponentInputProps = {
