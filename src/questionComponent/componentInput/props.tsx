@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { ComponentInputProps } from '.'
 import { Form, Input } from 'antd'
 import { useForm } from 'antd/es/form/Form'
-import { useDispatch } from 'react-redux'
 
 export const InputProps = (props: ComponentInputProps) => {
     const { title, placeholder, onChange } = props
