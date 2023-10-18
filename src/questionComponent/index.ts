@@ -5,10 +5,19 @@ import { ComponentTitleProps } from './componentTitle'
 import { ComponentTitleConfig } from './componentTitle/component'
 import { ComponentParagraph } from './componentParagraph'
 import { ComponentParagraphConfig } from './componentParagraph/component'
+import { ComponentInfoProps } from './componentInfo'
+import { ComponentInfoConfig } from './componentInfo/component'
+import { ComponentTextAreaProps } from './componentTextArea'
+import { ComponentTextAreaConfig } from './componentTextArea/component'
+import { ComponentRadioProps } from './componentRadio'
+import { ComponentRadioConfig } from './componentRadio/component'
 
 export type AllComponentProps = ComponentInputProps &
   ComponentTitleProps &
-  ComponentParagraph
+  ComponentParagraph &
+  ComponentInfoProps &
+  ComponentTextAreaProps &
+  ComponentRadioProps
 
 // 所有组件的配置
 export type ComponentConfig = {
@@ -22,7 +31,10 @@ export type ComponentConfig = {
 export const ComponentConfigList: ComponentConfig[] = [
   ComponentInputConfig,
   ComponentTitleConfig,
-  ComponentParagraphConfig
+  ComponentParagraphConfig,
+  ComponentInfoConfig,
+  ComponentTextAreaConfig,
+  ComponentRadioConfig
 ]
 
 export const getComponentByType = (type: string) => {
