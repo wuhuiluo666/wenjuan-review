@@ -41,7 +41,7 @@ export const CheckBoxProps = (props: ComponentCheckBoxProps) => {
                         <>
                             {
                                 fileds.map(({ key, name }, index) => (
-                                    <Space align={'center'} key={key}>
+                                    <Space align={'baseline'} key={key}>
                                         <Form.Item valuePropName={'checked'} name={[name, 'checked']}>
                                             <Checkbox></Checkbox>
                                         </Form.Item>
@@ -63,14 +63,14 @@ export const CheckBoxProps = (props: ComponentCheckBoxProps) => {
                                 ))
                             }
                             <Form.Item>
-                                <Button block icon={<PlusOutlined />} onClick={() => add({ text: '', value: '', checked: false })}></Button>
+                                <Button block icon={<PlusOutlined />} onClick={() => add({ text: '', value: '', checked: false })}>添加选项</Button>
                             </Form.Item>
                         </>
                     ))
                 }
             </Form.List>
         </Form.Item>
-        <Form.Item name={'isVertical'} valuePropName={'isVertical'} label={'是否垂直排列'}>
+        <Form.Item name={'isVertical'} valuePropName={'checked'} label={'是否垂直排列'}>
             <Checkbox></Checkbox>
         </Form.Item>
     </Form>

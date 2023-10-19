@@ -42,12 +42,12 @@ export const defaultProps = {
 export const ComponentCheckBox = (props: ComponentCheckBoxProps) => {
     const { title, isVertical, options } = { ...defaultProps, ...props }
     return <div>
-        <Typography>{title}</Typography>
+        <Typography.Paragraph>{title}</Typography.Paragraph>
         <Space direction={isVertical ? 'vertical' : 'horizontal'}>
             {
                 options?.map((item: any) => {
-                    const { key, text, value } = item
-                    return <Checkbox key={key} value={value}>{text}</Checkbox>
+                    const { key, text, value, checked } = item
+                    return <Checkbox checked={checked} key={key} value={value}>{text}</Checkbox>
                 })
             }
         </Space>
