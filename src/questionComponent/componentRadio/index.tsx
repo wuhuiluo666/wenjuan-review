@@ -20,7 +20,7 @@ const options: optionType[] = [
     { text: '选项3', value: '3' }
 ]
 
-export const defaultProps = {
+export const defaultProps: ComponentRadioProps = {
     title: '单选框标题',
     isVertical: false,
     options,

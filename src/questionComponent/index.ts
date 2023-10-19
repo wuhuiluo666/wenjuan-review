@@ -11,13 +11,16 @@ import { ComponentTextAreaProps } from './componentTextArea'
 import { ComponentTextAreaConfig } from './componentTextArea/component'
 import { ComponentRadioProps } from './componentRadio'
 import { ComponentRadioConfig } from './componentRadio/component'
+import { ComponentCheckBoxProps } from './componentCheckBox'
+import { ComponentCheckBoxConfig } from './componentCheckBox/component'
 
 export type AllComponentProps = ComponentInputProps &
   ComponentTitleProps &
   ComponentParagraph &
   ComponentInfoProps &
   ComponentTextAreaProps &
-  ComponentRadioProps
+  ComponentRadioProps &
+  ComponentCheckBoxProps
 
 // 所有组件的配置
 export type ComponentConfig = {
@@ -34,9 +37,11 @@ export const ComponentConfigList: ComponentConfig[] = [
   ComponentParagraphConfig,
   ComponentInfoConfig,
   ComponentTextAreaConfig,
-  ComponentRadioConfig
+  ComponentRadioConfig,
+  ComponentCheckBoxConfig
 ]
 
 export const getComponentByType = (type: string) => {
+  console.log('type', type)
   return ComponentConfigList.find((component) => component.type === type)
 }

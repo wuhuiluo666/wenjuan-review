@@ -1,15 +1,15 @@
-import { Checkbox, Space, Typography } from 'antd'
 import React from 'react'
+import { Checkbox, Space, Typography } from 'antd'
 
 interface itemType {
     text: string
     value: string
-    checked: boolean
+    checked?: boolean
 }
 
 export interface ComponentCheckBoxProps {
     title?: string
-    isVertical?: string
+    isVertical?: boolean
     options?: itemType[]
     onChange?: (data: ComponentCheckBoxProps) => void
 }
@@ -46,8 +46,8 @@ export const ComponentCheckBox = (props: ComponentCheckBoxProps) => {
         <Space direction={isVertical ? 'vertical' : 'horizontal'}>
             {
                 options?.map((item: any) => {
-                    const { text, value, checked } = item
-                    return <Checkbox key={value} checked={checked} value={value}>{text}</Checkbox>
+                    const { key, text, value } = item
+                    return <Checkbox key={key} value={value}>{text}</Checkbox>
                 })
             }
         </Space>

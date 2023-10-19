@@ -3,14 +3,34 @@ import { ComponentCheckBoxProps } from '.'
 import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { useForm } from 'antd/es/form/Form'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
+import { nanoid } from '@reduxjs/toolkit'
 
 export const CheckBoxProps = (props: ComponentCheckBoxProps) => {
-    const { title, isVertical, options } = props
+    const { title, isVertical, options, onChange } = props
     const [form] = useForm()
     useEffect(() => {
-
-    },[])
-    return <Form form={form} layout={'vertical'} initialValues={{ title, isVertical, options }}>
+        form.setFieldsValue({ title, isVertical, options })
+    }, [title, isVertical, options])
+    const valuesChange = () => {
+        if (!onChange) return
+        const values = form.getFieldsValue() as ComponentCheckBoxProps
+        if (values.options) {
+            // 过滤掉undefined的值
+            values.options = values.options.filter(item => item.text.length !== null)
+        }
+        // values?.options?.map(item => {
+        //     return {
+        //         ...item,
+        //         value: nanoid(5)
+        //     }
+        // })
+        values?.options?.map((item: any) => {
+            if (item.value) return
+            item.value = nanoid(5)
+        })
+        onChange(values)
+    }
+    return <Form onValuesChange={valuesChange} form={form} layout={'vertical'} initialValues={{ title, isVertical, options }}>
         <Form.Item label={'复选框标题'} name={'title'}>
             <Input />
         </Form.Item>
