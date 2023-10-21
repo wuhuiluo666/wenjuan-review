@@ -41,6 +41,28 @@ export const ComponentConfigList: ComponentConfig[] = [
   ComponentCheckBoxConfig
 ]
 
+export const ComponentConfigGroup = [
+  {
+    groupId: 'group_text',
+    groupName: '文本显示',
+    components: [
+      ComponentTitleConfig,
+      ComponentParagraphConfig,
+      ComponentInfoConfig
+    ]
+  },
+  {
+    groupId: 'group_input',
+    groupName: '用户输入',
+    components: [ComponentInputConfig, ComponentTextAreaConfig]
+  },
+  {
+    groupId: 'group_radio',
+    group: '用户选择',
+    components: [ComponentRadioConfig, ComponentCheckBoxConfig]
+  }
+]
+
 export const getComponentByType = (type: string) => {
   console.log('type', type)
   return ComponentConfigList.find((component) => component.type === type)
