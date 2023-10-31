@@ -58,7 +58,7 @@ export const ComponentConfigGroup = [
   },
   {
     groupId: 'group_radio',
-    group: '用户选择',
+    groupName: '用户选择',
     components: [ComponentRadioConfig, ComponentCheckBoxConfig]
   }
 ]

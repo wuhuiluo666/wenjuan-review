@@ -5,6 +5,8 @@ import { EditCanvas } from './editCanvas'
 import { useDispatch } from 'react-redux'
 import { changeSelectedId } from '../../store/component'
 import { RightPanel } from './rihgtPanel'
+import { LeftPanel } from './leftPanel'
+import { EditHeader } from './editHeader'
 
 
 export const Edit = () => {
@@ -14,14 +16,11 @@ export const Edit = () => {
         dispatch(changeSelectedId({ fe_id: '' }))
     }
     return <div className={styles['edit-container']}>
-        <div>
-            Header
-        </div>
+        <EditHeader />
         <div className={styles['content-wrapper']}>
             <div className={styles.content}>
                 <div className={styles.left}>
-                    {/* <LeftPanel /> */}
-                    LEFT
+                    <LeftPanel></LeftPanel>
                 </div>
                 <div onClick={clearSelectedId} className={styles.main}>
                     <div className={styles['canvas-warpper']}>

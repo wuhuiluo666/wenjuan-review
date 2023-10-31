@@ -7,6 +7,7 @@ export type ComponentProps = {
   fe_id: string
   title: string
   type: string
+  isHidden: boolean
   props: AllComponentProps
 }
 
@@ -59,10 +60,32 @@ const componentSlice = createSlice({
           }
         }
       }
+    ),
+    // 添加组件
+    addComp: produce(
+      (draft: ComponentStateProps, action: PayloadAction<ComponentProps>) => {
+        // 拿到当前选中的组件下标
+        const curCompIndex = draft.componentsList.findIndex(
+          (component) => component.fe_id === draft.selectedId
+        )
+        if (curCompIndex >= 0) {
+          // 有选中 增加到选中的下一个
+          draft.componentsList.splice(curCompIndex + 1, 0, action.payload)
+        } else {
+          // 没有选中 增加到最后一个
+          draft.componentsList.push(action.payload)
+        }
+        // 将新增的设置为选中状态
+        draft.selectedId = action.payload.fe_id
+      }
     )
   }
 })
 
-export const { resetComponent, changeSelectedId, changeComponentProps } =
-  componentSlice.actions
+export const {
+  resetComponent,
+  changeSelectedId,
+  changeComponentProps,
+  addComp
+} = componentSlice.actions
 export default componentSlice.reducer
