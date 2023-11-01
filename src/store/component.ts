@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { produce } from 'immer'
 import { AllComponentProps } from '../questionComponent'
+import { useGenNewSelectedId } from '../hooks/useGenNewSelectedId'
 
 // 单个组件的属性
 export type ComponentProps = {
   fe_id: string
   title: string
   type: string
-  isHidden: boolean
+  isHidden?: boolean // 隐藏
+  isLocked?: boolean // 锁定
   props: AllComponentProps
 }
 
@@ -78,7 +80,24 @@ const componentSlice = createSlice({
         // 将新增的设置为选中状态
         draft.selectedId = action.payload.fe_id
       }
-    )
+    ),
+    // 删除组件
+    deleteComp: produce((draft: ComponentStateProps) => {
+      // 先在原来还没删除的数组上设置选中的id,再去splice数组
+      const { selectedId = '', componentsList = [] } = draft
+      const newSelectedId = useGenNewSelectedId(selectedId, componentsList)
+      // 删除后要选中哪个组件
+      draft.selectedId = newSelectedId
+      console.log('draft333,', draft.selectedId) // 这个是新的
+      console.log('selected444', selectedId) // 旧的
+      // 拿到当前选中的下标
+      const curCompIndex = componentsList.findIndex(
+        (component: ComponentProps) => component.fe_id === selectedId
+      )
+      if (curCompIndex >= 0) {
+        componentsList.splice(curCompIndex, 1)
+      }
+    })
   }
 })
 
@@ -86,6 +105,7 @@ export const {
   resetComponent,
   changeSelectedId,
   changeComponentProps,
-  addComp
+  addComp,
+  deleteComp
 } = componentSlice.actions
 export default componentSlice.reducer
