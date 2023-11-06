@@ -23,12 +23,14 @@ export const EditCanvas = ({ loading }: { loading: boolean }) => {
     return <div className={styles.canvas}>
         {
             componentsList.filter((c: any) => !c.isHidden).map((component: ComponentProps) => {
-                const { fe_id } = component
+                const { isLocked, fe_id } = component
                 const defaultComponentClassName = styles['component-wrapper']
                 const selectedComponentClassName = styles.selected
+                const lockComponentClassName = styles.locked
                 const ComponentClassName = className({
                     [defaultComponentClassName]: true,
-                    [selectedComponentClassName]: fe_id == selectedId
+                    [selectedComponentClassName]: fe_id == selectedId,
+                    [lockComponentClassName]: isLocked
                 })
                 return <div onClick={(e: any) => clickComponent(e, fe_id)} key={fe_id} className={ComponentClassName}>
                     <div className={styles.component}>

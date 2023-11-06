@@ -97,7 +97,44 @@ const componentSlice = createSlice({
       if (curCompIndex >= 0) {
         componentsList.splice(curCompIndex, 1)
       }
-    })
+    }),
+    // 锁定组件
+    lockComp: produce(
+      (
+        draft: ComponentStateProps,
+        action: PayloadAction<{ fe_id: string }>
+      ) => {
+        const { componentsList } = draft
+        const { fe_id } = action.payload
+        const curComp = componentsList.find(
+          (c: ComponentProps) => c.fe_id === fe_id
+        )
+        if (!curComp) return
+        curComp.isLocked = !curComp.isLocked
+      }
+    ),
+    // 隐藏/解锁组件
+    hideComp: produce(
+      (
+        draft: ComponentStateProps,
+        action: PayloadAction<{ fe_id: string; hidden: boolean }>
+      ) => {
+        const { componentsList } = draft
+        const { fe_id, hidden } = action.payload
+        console.log('fe_id', fe_id)
+        let newSelectedId
+        // 如果需要隐藏 生成新的选中id
+        if (hidden) {
+          newSelectedId = useGenNewSelectedId(fe_id, componentsList)
+        } else {
+          newSelectedId = fe_id
+        }
+        draft.selectedId = newSelectedId
+        const curComponent = componentsList.find((c: any) => c.fe_id === fe_id)
+        if (!curComponent) return
+        curComponent.isHidden = hidden
+      }
+    )
   }
 })
 
@@ -106,6 +143,8 @@ export const {
   changeSelectedId,
   changeComponentProps,
   addComp,
-  deleteComp
+  deleteComp,
+  lockComp,
+  hideComp
 } = componentSlice.actions
 export default componentSlice.reducer

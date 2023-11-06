@@ -10,6 +10,7 @@ interface itemType {
 export interface ComponentCheckBoxProps {
     title?: string
     isVertical?: boolean
+    disabled?: boolean
     options?: itemType[]
     onChange?: (data: ComponentCheckBoxProps) => void
 }

@@ -3,13 +3,13 @@ import { ComponentProps } from '../store/component'
 export const useGenNewSelectedId = (
   fe_id: string,
   componnetList: ComponentProps[]
-) => {
+) => { // 4
   const visibleComponentList = componnetList.filter(
     (c: ComponentProps) => !c.isHidden
   )
-  const currentComponentIndex = componnetList.findIndex(
+  const currentComponentIndex = visibleComponentList.findIndex(
     (c: ComponentProps) => c.fe_id === fe_id
-  )
+  ) // 1
   // 没有选中返回值为-1
   if (currentComponentIndex < 0) return ''
   // 只有一项也返回空字符串

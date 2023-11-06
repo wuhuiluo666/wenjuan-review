@@ -6,7 +6,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { nanoid } from '@reduxjs/toolkit'
 
 export const CheckBoxProps = (props: ComponentCheckBoxProps) => {
-    const { title, isVertical, options, onChange } = props
+    const { title, isVertical, options, onChange, disabled } = props
     const [form] = useForm()
     useEffect(() => {
         form.setFieldsValue({ title, isVertical, options })
@@ -30,7 +30,7 @@ export const CheckBoxProps = (props: ComponentCheckBoxProps) => {
         })
         onChange(values)
     }
-    return <Form onValuesChange={valuesChange} form={form} layout={'vertical'} initialValues={{ title, isVertical, options }}>
+    return <Form disabled={disabled} onValuesChange={valuesChange} form={form} layout={'vertical'} initialValues={{ title, isVertical, options }}>
         <Form.Item label={'复选框标题'} name={'title'}>
             <Input />
         </Form.Item>

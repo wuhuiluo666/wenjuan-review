@@ -13,7 +13,7 @@ export const PropsForm = () => {
     }
     const { currentComponent, selectedId } = useSelectorComponent()
     if (!currentComponent) return <NoProp />
-    const { props, type } = currentComponent
+    const { props, type, isLocked } = currentComponent
     const componentConfig = getComponentByType(type)
     if (!componentConfig) return <NoProp />
     const { ComponentProps } = componentConfig
@@ -21,5 +21,5 @@ export const PropsForm = () => {
         if (!currentComponent) return
         dispatch(changeComponentProps({ fe_id: selectedId, newProps }))
     }
-    return <ComponentProps {...props} onChange={onChange} />
+    return <ComponentProps {...props} onChange={onChange} disabled={isLocked} />
 }
