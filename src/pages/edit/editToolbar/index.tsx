@@ -27,10 +27,10 @@ export const EditToolBar = () => {
                 <Button onClick={deleteComponent} icon={<DeleteOutlined />} shape={'circle'}></Button>
             </Tooltip>
             <Tooltip title={'锁定'}>
-                <Button onClick={lockComponent} icon={<LockOutlined />} shape={'circle'}></Button>
+                <Button type={isLocked ? 'primary' : 'default'} onClick={lockComponent} icon={<LockOutlined />} shape={'circle'}></Button>
             </Tooltip>
             <Tooltip title={'隐藏'}>
-                <Button type={isLocked ? 'primary' : 'default'} onClick={hiddenComponent} icon={<EyeInvisibleOutlined />} shape={'circle'}></Button>
+                <Button onClick={hiddenComponent} icon={<EyeInvisibleOutlined />} shape={'circle'}></Button>
             </Tooltip>
         </Space>
     </div>

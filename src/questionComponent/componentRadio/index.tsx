@@ -11,6 +11,7 @@ export interface ComponentRadioProps {
     isVertical?: boolean
     options?: optionType[]
     value?: string
+    disabled?: boolean
     onChange?: (data: ComponentRadioProps) => void
 }
 

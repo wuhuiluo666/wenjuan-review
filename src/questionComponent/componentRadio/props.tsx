@@ -6,7 +6,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { nanoid } from '@reduxjs/toolkit'
 
 export const RadioProps = (props: ComponentRadioProps) => {
-    const { title, isVertical, options, value, onChange } = props
+    const { title, isVertical, options, value, onChange, disabled } = props
     const [form] = useForm()
     useEffect(() => {
         form.setFieldsValue({ title, value, options, isVertical })
@@ -24,7 +24,7 @@ export const RadioProps = (props: ComponentRadioProps) => {
         })
         onChange(newValues)
     }
-    return <Form onValuesChange={valuesChange} layout={'vertical'} form={form} initialValues={{ title, isVertical, options, value }}>
+    return <Form disabled={disabled} onValuesChange={valuesChange} layout={'vertical'} form={form} initialValues={{ title, isVertical, options, value }}>
         <Form.Item label={'标题'} name={'title'} rules={[{ required: true, message: "请输入标题" }]}>
             <Input />
         </Form.Item>

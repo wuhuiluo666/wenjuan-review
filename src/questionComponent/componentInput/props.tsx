@@ -4,7 +4,7 @@ import { Form, Input } from 'antd'
 import { useForm } from 'antd/es/form/Form'
 
 export const InputProps = (props: ComponentInputProps) => {
-    const { title, placeholder, onChange } = props
+    const { title, placeholder, onChange, disabled } = props
     const [form] = useForm()
     // 点击时改变属性变化
     useEffect(() => {
@@ -16,7 +16,7 @@ export const InputProps = (props: ComponentInputProps) => {
             onChange(form.getFieldsValue())
         }
     }
-    return <Form onValuesChange={valuesChange} initialValues={{ title, placeholder }} form={form} layout={'vertical'} >
+    return <Form disabled={disabled} onValuesChange={valuesChange} initialValues={{ title, placeholder }} form={form} layout={'vertical'} >
         <Form.Item label={'输入框组件标题'} name={'title'} rules={[{ required: true, message: '请输入标题' }]}>
             <Input />
         </Form.Item>

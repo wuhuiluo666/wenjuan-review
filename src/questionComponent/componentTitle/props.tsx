@@ -10,7 +10,7 @@ const options = [
 ]
 
 export const TitleProps = (props: ComponentTitleProps) => {
-    const { text, level, isCenter, onChange } = props
+    const { text, level, isCenter, onChange, disabled } = props
     const [form] = useForm()
     useEffect(() => {
         form.setFieldsValue({ text, level, isCenter })
@@ -20,7 +20,7 @@ export const TitleProps = (props: ComponentTitleProps) => {
             onChange(form.getFieldsValue())
         }
     }
-    return <Form onChange={valuesChange} initialValues={{ text, level, isCenter }} form={form} layout={'vertical'} >
+    return <Form disabled={disabled} onChange={valuesChange} initialValues={{ text, level, isCenter }} form={form} layout={'vertical'} >
         <Form.Item label={'标题内容'} name={'text'} rules={[{ required: true, message: '请输入标题内容' }]}>
             <Input />
         </Form.Item>

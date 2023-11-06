@@ -5,6 +5,7 @@ import { Input, Typography } from 'antd'
 export interface ComponentInputProps {
     title?: string
     placeholder?: string
+    disabled?: boolean
     onChange?: (data: ComponentInputProps) => void
 }
 

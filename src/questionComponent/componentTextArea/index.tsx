@@ -5,6 +5,7 @@ const { TextArea } = Input
 export interface ComponentTextAreaProps {
     title?: string
     placeholder?: string
+    disabled?: boolean
     onChange?: (data: ComponentTextAreaProps) => void
 }
 

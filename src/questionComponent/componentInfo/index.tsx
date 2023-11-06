@@ -4,6 +4,7 @@ import { Typography } from 'antd'
 export interface ComponentInfoProps {
     title?: string
     desc?: string
+    disabled?: boolean
     onChange?: (data: ComponentInfoProps) => void
 }
 
@@ -18,9 +19,9 @@ export const ComponentInfo = (props: ComponentInfoProps) => {
         <Typography.Title>{title}</Typography.Title>
         <Typography.Paragraph>
             {
-                desc.split('\n').map((desc,index) => {
+                desc.split('\n').map((desc, index) => {
                     return <span>
-                        { index > 0 && <br />}
+                        {index > 0 && <br />}
                         {desc}
                     </span>
                 })

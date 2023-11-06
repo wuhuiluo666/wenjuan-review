@@ -4,6 +4,7 @@ import { Typography } from 'antd'
 export interface ComponentParagraph {
     text?: string
     isCenter?: boolean
+    disabled?: boolean
     onChange?: (data: ComponentParagraph) => void
 }
 

@@ -7,14 +7,14 @@ const { TextArea } = Input
 
 export const ParagraphProps = (props: ComponentParagraph) => {
     const [form] = useForm()
-    const { text, isCenter, onChange } = props
+    const { text, isCenter, onChange, disabled } = props
     useEffect(() => {
         form.setFieldsValue({ text, isCenter })
     }, [text, isCenter])
     const valuesChange = () => {
         onChange && onChange(form.getFieldsValue())
     }
-    return <Form onChange={valuesChange} layout={'vertical'} form={form} initialValues={{ text, isCenter }}>
+    return <Form disabled={disabled} onChange={valuesChange} layout={'vertical'} form={form} initialValues={{ text, isCenter }}>
         <Form.Item label={'段落内容'} name={'text'} rules={[{ required: true, message: '请输入段落内容' }]}>
             <TextArea style={{ height: '150px' }}></TextArea>
         </Form.Item>
