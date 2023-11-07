@@ -24,7 +24,8 @@ export const useGetComponentList = () => {
     dispatch(
       resetComponent({
         componentsList,
-        selectedId: ''
+        selectedId: '',
+        copiedComponet: null
       })
     )
   }, [data])

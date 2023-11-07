@@ -5,9 +5,11 @@ import { ComponentProps, changeSelectedId } from '../../../store/component'
 import className from 'classnames'
 import { getComponentByType } from '../../../questionComponent'
 import { useDispatch } from 'react-redux'
+import { useBindCanvans } from '../../../hooks/useBindCavans'
 
 export const EditCanvas = ({ loading }: { loading: boolean }) => {
     const dispatch = useDispatch()
+    useBindCanvans()
     const { selectedId, componentsList } = useSelectorComponent()
     const genComponent = (component: ComponentProps) => {
         const { props, type } = component

@@ -1,8 +1,8 @@
 import React from 'react'
-import { CopyOutlined, DeleteOutlined, EyeInvisibleOutlined, HeartOutlined, LockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
+import { CopyOutlined, BlockOutlined, DeleteOutlined, EyeInvisibleOutlined, HeartOutlined, LockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
 import { Button, Space, Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
-import { deleteComp, hideComp, lockComp } from '../../../store/component'
+import { copyComp, deleteComp, hideComp, lockComp, pasteComp } from '../../../store/component'
 import { useGetComponentInfo } from '../../../hooks/useGetComponentInfo'
 
 export const EditToolBar = () => {
@@ -21,6 +21,14 @@ export const EditToolBar = () => {
     const hiddenComponent = () => {
         dispatch(hideComp({ fe_id: selectedId, hidden: true }))
     }
+    // 复制
+    const copyComponent = () => {
+        dispatch(copyComp())
+    }
+    // 粘贴
+    const pasteComponent = () => {
+        dispatch(pasteComp())
+    }
     return <div>
         <Space>
             <Tooltip title={'删除'}>
@@ -31,6 +39,12 @@ export const EditToolBar = () => {
             </Tooltip>
             <Tooltip title={'隐藏'}>
                 <Button onClick={hiddenComponent} icon={<EyeInvisibleOutlined />} shape={'circle'}></Button>
+            </Tooltip>
+            <Tooltip title={'复制'}>
+                <Button onClick={copyComponent} shape={'circle'} icon={<CopyOutlined />}></Button>
+            </Tooltip>
+            <Tooltip title={'粘贴'}>
+                <Button onClick={pasteComponent} shape={'circle'} icon={<BlockOutlined />}></Button>
             </Tooltip>
         </Space>
     </div>
