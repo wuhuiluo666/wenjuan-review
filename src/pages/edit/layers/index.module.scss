@@ -5,7 +5,7 @@
   align-items: center;
 
   .title {
-    flex: auto;
+    width: 100%;
     line-height: 2;
   }
 
@@ -14,6 +14,15 @@
   }
 
   .handler {
-    width: 50px;
+    width: auto;
+
+    .btn {
+      opacity: .2;
+    }
+    &:hover {
+      .btn {
+        opacity: 1;
+      }
+    }
   }
 }

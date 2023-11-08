@@ -30,7 +30,9 @@ export const LeftPanel = () => {
                 </span>
             ),
             children: (
-                <Layers></Layers>
+                <div>
+                    <Layers></Layers>
+                </div>
             )
         }
     ]
