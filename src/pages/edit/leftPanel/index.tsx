@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Tabs } from 'antd'
+import { Layout, Tabs } from 'antd'
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons'
 import { Lib } from '../lib/lib'
+import { Layers } from '../layers'
 
 
 // 左侧组件
@@ -29,7 +30,7 @@ export const LeftPanel = () => {
                 </span>
             ),
             children: (
-                <span>图层</span>
+                <Layers></Layers>
             )
         }
     ]
