@@ -152,10 +152,24 @@ const componentSlice = createSlice({
     // 粘贴组件
     pasteComp: produce((draft: ComponentStateProps) => {
       const { copiedComponet } = draft
-      if(copiedComponet === null) return
+      if (copiedComponet === null) return
       copiedComponet.fe_id = nanoid()
       useAddNewComponent(draft, copiedComponet)
-    })
+    }),
+    // 改变组件标题名
+    changeCompTitle: produce(
+      (
+        draft: ComponentStateProps,
+        action: PayloadAction<{ newTitle: string }>
+      ) => {
+        const { selectedId, componentsList } = draft
+        const { newTitle } = action.payload
+        // 拿到当前选中的组件
+        const currentComponent = componentsList.find(c => c.fe_id === selectedId)
+        if(!currentComponent) return
+        currentComponent.title = newTitle
+      }
+    )
   }
 })
 
