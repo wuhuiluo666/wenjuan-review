@@ -6,9 +6,11 @@ import { copyComp, deleteComp, hideComp, lockComp, pasteComp } from '../../../st
 import { useGetComponentInfo } from '../../../hooks/useGetComponentInfo'
 
 export const EditToolBar = () => {
-    const { selectedId, currentComponent } = useGetComponentInfo()
+    const { selectedId, currentComponent, componentsList } = useGetComponentInfo()
     const { isLocked } = currentComponent || {}
     const dispatch = useDispatch()
+    const isFirstOrNoSelect = componentsList.findIndex(c => c.fe_id === selectedId) <= 0
+    const isLastOrNoSelect = (componentsList.findIndex(c => c.fe_id === selectedId) + 1 == componentsList.length) || componentsList.findIndex(c => c.fe_id === selectedId) < 0
     // 删除
     const deleteComponent = () => {
         dispatch(deleteComp())
@@ -29,6 +31,14 @@ export const EditToolBar = () => {
     const pasteComponent = () => {
         dispatch(pasteComp())
     }
+    // 上一个
+    const prevComponent = () => {
+
+    }
+    // 下一个
+    const nextComponent = () => {
+
+    }
     return <div>
         <Space>
             <Tooltip title={'删除'}>
@@ -45,6 +55,12 @@ export const EditToolBar = () => {
             </Tooltip>
             <Tooltip title={'粘贴'}>
                 <Button onClick={pasteComponent} shape={'circle'} icon={<BlockOutlined />}></Button>
+            </Tooltip>
+            <Tooltip title={'上移'}>
+                <Button disabled={isFirstOrNoSelect} onClick={pasteComponent} shape={'circle'} icon={<UpOutlined />}></Button>
+            </Tooltip>
+            <Tooltip title={'下移'}>
+                <Button disabled={isLastOrNoSelect} onClick={pasteComponent} shape={'circle'} icon={<DownOutlined />}></Button>
             </Tooltip>
         </Space>
     </div>

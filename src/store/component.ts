@@ -165,11 +165,21 @@ const componentSlice = createSlice({
         const { selectedId, componentsList } = draft
         const { newTitle } = action.payload
         // 拿到当前选中的组件
-        const currentComponent = componentsList.find(c => c.fe_id === selectedId)
-        if(!currentComponent) return
+        const currentComponent = componentsList.find(
+          (c) => c.fe_id === selectedId
+        )
+        if (!currentComponent) return
         currentComponent.title = newTitle
       }
-    )
+    ),
+    // 上移选中
+    prevSelectedComponent: produce((draft: ComponentStateProps) => {
+      const { componentsList, selectedId } = draft
+      const currentComponentIndex = componentsList.findIndex(c => c.fe_id === selectedId)
+      if(currentComponentIndex < 0) return
+      draft.selectedId = componentsList[currentComponentIndex - 1].fe_id
+    })
+    // 下移选中
   }
 })
 
@@ -182,6 +192,7 @@ export const {
   lockComp,
   hideComp,
   copyComp,
-  pasteComp
+  pasteComp,
+  changeCompTitle
 } = componentSlice.actions
 export default componentSlice.reducer

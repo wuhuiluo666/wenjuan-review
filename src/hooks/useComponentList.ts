@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { resetComponent } from '../store/component'
+import { resetPageInfo } from '../store/pageInfo'
 
 export const useGetComponentList = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,28 @@ export const useGetComponentList = () => {
   )
   useEffect(() => {
     if (!data) return
-    const { componentsList = [] } = data as any
+    const {
+      componentsList = [],
+      title,
+      desc,
+      js,
+      css,
+      isPublished
+    } = data as any
     dispatch(
       resetComponent({
         componentsList,
         selectedId: '',
         copiedComponet: null
+      })
+    )
+    dispatch(
+      resetPageInfo({
+        title,
+        desc,
+        js,
+        css,
+        isPublished
       })
     )
   }, [data])

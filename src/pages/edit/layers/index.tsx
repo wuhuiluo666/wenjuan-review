@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import classNames from 'classnames'
 import styles from './index.module.scss'
 import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
 import { useGetComponentInfo } from '../../../hooks/useGetComponentInfo'
-import { ComponentProps, changeSelectedId, hideComp, lockComp } from '../../../store/component'
+import { ComponentProps, changeCompTitle, changeSelectedId, hideComp, lockComp } from '../../../store/component'
 import { Button, Input, Space, message } from 'antd'
 import { useDispatch } from 'react-redux'
 
@@ -36,6 +36,11 @@ export const Layers = () => {
         }
         setChangingTitleId(fe_id)
     }
+    const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        let inputValue = e.target.value.trim()
+        if (!inputValue) return
+        dispatch(changeCompTitle({ newTitle: inputValue }))
+    }
     return <div>
         {
             componentsList.map((c: ComponentProps) => {
@@ -47,7 +52,7 @@ export const Layers = () => {
                 return (
                     <div className={styles.wrapper} key={fe_id}>
                         <div className={titleClassName} onClick={() => changingTitle(fe_id)}>
-                            {changingTitleId === fe_id && <Input value={title} onPressEnter={() => setChangingTitleId('')} onBlur={() => setChangingTitleId('')} />}
+                            {changingTitleId === fe_id && <Input onChange={handleChangeTitle} value={title} onPressEnter={() => setChangingTitleId('')} onBlur={() => setChangingTitleId('')} />}
                             {changingTitleId !== fe_id && title}
                         </div>
                         <div className={styles.handler}>
