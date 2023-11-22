@@ -2,7 +2,7 @@ import React from 'react'
 import { CopyOutlined, BlockOutlined, DeleteOutlined, EyeInvisibleOutlined, HeartOutlined, LockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
 import { Button, Space, Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
-import { copyComp, deleteComp, hideComp, lockComp, pasteComp } from '../../../store/component'
+import { copyComp, deleteComp, hideComp, lockComp, nextSelectedComponent, pasteComp, prevSelectedComponent, } from '../../../store/component'
 import { useGetComponentInfo } from '../../../hooks/useGetComponentInfo'
 
 export const EditToolBar = () => {
@@ -33,11 +33,11 @@ export const EditToolBar = () => {
     }
     // 上一个
     const prevComponent = () => {
-
+        dispatch(prevSelectedComponent())
     }
     // 下一个
     const nextComponent = () => {
-
+        dispatch(nextSelectedComponent())
     }
     return <div>
         <Space>
@@ -57,10 +57,10 @@ export const EditToolBar = () => {
                 <Button onClick={pasteComponent} shape={'circle'} icon={<BlockOutlined />}></Button>
             </Tooltip>
             <Tooltip title={'上移'}>
-                <Button disabled={isFirstOrNoSelect} onClick={pasteComponent} shape={'circle'} icon={<UpOutlined />}></Button>
+                <Button onClick={prevComponent} disabled={isFirstOrNoSelect} shape={'circle'} icon={<UpOutlined />}></Button>
             </Tooltip>
             <Tooltip title={'下移'}>
-                <Button disabled={isLastOrNoSelect} onClick={pasteComponent} shape={'circle'} icon={<DownOutlined />}></Button>
+                <Button disabled={isLastOrNoSelect} onClick={nextComponent} shape={'circle'} icon={<DownOutlined />}></Button>
             </Tooltip>
         </Space>
     </div>

@@ -175,11 +175,21 @@ const componentSlice = createSlice({
     // 上移选中
     prevSelectedComponent: produce((draft: ComponentStateProps) => {
       const { componentsList, selectedId } = draft
-      const currentComponentIndex = componentsList.findIndex(c => c.fe_id === selectedId)
-      if(currentComponentIndex < 0) return
+      const currentComponentIndex = componentsList.findIndex(
+        (c) => c.fe_id === selectedId
+      )
+      if (currentComponentIndex < 0) return
       draft.selectedId = componentsList[currentComponentIndex - 1].fe_id
-    })
+    }),
     // 下移选中
+    nextSelectedComponent: produce((draft: ComponentStateProps) => {
+      const { selectedId, componentsList } = draft
+      const currentComponentIndex = componentsList.findIndex(
+        (c) => c.fe_id === selectedId
+      )
+      if (currentComponentIndex < 0) return
+      draft.selectedId = componentsList[currentComponentIndex + 1].fe_id
+    })
   }
 })
 
@@ -193,6 +203,8 @@ export const {
   hideComp,
   copyComp,
   pasteComp,
-  changeCompTitle
+  changeCompTitle,
+  prevSelectedComponent,
+  nextSelectedComponent
 } = componentSlice.actions
 export default componentSlice.reducer
