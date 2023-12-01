@@ -7,6 +7,7 @@ import Star from '../pages/ManageQuestion/star'
 import { Trash } from '../pages/ManageQuestion/trash'
 import { QuestionLayout } from '../layouts/QuestionLayout'
 import { Edit } from '../pages/Edit'
+import { ReviewReact } from '../pages/reviewReact'
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
                 ]
             }
         ]
+    },
+    {
+        path: 'review',
+        element: <ReviewReact />
     },
     {
         path: 'question',
