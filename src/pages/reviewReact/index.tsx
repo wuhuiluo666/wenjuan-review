@@ -1,23 +1,26 @@
-import { Button } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button } from "antd"
+import { useReducer } from "react"
 
 export const ReviewReact = () => {
-    // 类似防抖，如果不清除副作用值改变一次就会一秒钟打印一次 清除后只打印最后的那一次结果
-    // const [value, setValue] = useState(0)
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         console.log('value', value)
-    //     }, 1000)
-    //     return () => {
-    //         clearTimeout(timer)
-    //     }
-    // }, [value])
-    // const addValue = () => {
-    //     setValue(value + 1)
-    // }
-    // return <div>
-    //     <Button onClick={addValue}>value: {value}</Button>
-    // </div>
+    const [number, dispatchNumber] = useReducer((state: any, action: any) => {
+        const { name, payload } = action
+        switch (name) {
+            case 'add':
+                return state + 1
+            case 'sub':
+                return state - 1
+            case 'reset':
+                return payload
+        }
+        return state
+    }, 0)
     return <div>
+        {number}
+        {/* 增加减少重置 */}
+        <div>
+            <Button onClick={() => dispatchNumber({ name: 'add' })}>增加</Button>
+            <Button onClick={() => dispatchNumber({ name: 'sub' })}>减少</Button>
+            <Button onClick={() => dispatchNumber({ name: 'reset' })}>重置</Button>
+        </div>
     </div>
 }
