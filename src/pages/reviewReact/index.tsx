@@ -6,9 +6,9 @@ export const ReviewReact = () => {
         const { name, payload } = action
         switch (name) {
             case 'add':
-                return state + 1
+                return state + 11
             case 'sub':
-                return state - 1
+                return state - 11
             case 'reset':
                 return payload
         }
