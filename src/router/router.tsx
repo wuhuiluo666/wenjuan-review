@@ -6,7 +6,7 @@ import { List } from '../pages/ManageQuestion/list'
 import Star from '../pages/ManageQuestion/star'
 import { Trash } from '../pages/ManageQuestion/trash'
 import { QuestionLayout } from '../layouts/QuestionLayout'
-// import { Edit } from '../pages/Edit'
+import { Edit } from '../pages/Edit'
 import { ReviewReact } from '../pages/reviewReact'
 
 const router = createBrowserRouter([
@@ -16,21 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <ManageLayout />,
-                children: [
-                    {
-                        path: 'list',
-                        element: <List />
-                    },
-                    {
-                        path: 'star',
-                        element: <Star />
-                    },
-                    {
-                        path: 'trash',
-                        element: <Trash />
-                    }
-                ]
+                element: <Home />
             },
             {
                 path: 'manage',
@@ -56,15 +42,15 @@ const router = createBrowserRouter([
         path: 'review',
         element: <ReviewReact />
     },
-    // {
-    //     path: 'question',
-    //     element: <QuestionLayout />,
-    //     children: [{
-    //         path: 'edit/:id',
-    //         element: <Edit />
-    //     }
-    //     ]
-    // }
+    {
+        path: 'question',
+        element: <QuestionLayout />,
+        children: [{
+            path: 'edit/:id',
+            element: <Edit />
+        }
+        ]
+    }
 ])
 
 export default router
