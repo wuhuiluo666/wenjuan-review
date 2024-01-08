@@ -12,7 +12,7 @@ export type SearchType = {
 export const getQuestionList = async (
   searchParams: Partial<SearchType> = {}
 ) => {
-  const url = '/api/question'
+  const url = 'https://question-server.onrender.com/api/question'
   const data = await instance.get(url, {
     params: searchParams
   })
@@ -24,14 +24,14 @@ export const changeStarState = async (
   id: string,
   options: { [key: string]: any }
 ) => {
-  const url = `/api/question/${id}`
+  const url = `https://question-server.onrender.com/api/question/${id}`
   const data = await instance.patch(url, options)
   return data
 }
 
 // 复制问卷
 export const copyQuestion = async (id: string) => {
-  const url = `/api/question/copy/${id}`
+  const url = `https://question-server.onrender.com/api/question/copy/${id}`
   const data = await instance.post(url)
   return data
 }
