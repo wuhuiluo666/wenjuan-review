@@ -3,12 +3,32 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { store } from './store';
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+
+
+// import { Provider } from 'react-redux';
+// import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+// 定义reducer
+
+const counter = (state = 0, action: { type: string}) => {
+  switch (action.type) {
+    case 'add':
+      return state + 1
+    case 'js':
+      return state - 1
+    default: 
+      return state
+  }
+}
+
+const rootReducer = combineReducers({ counter })
+const store = createStore(rootReducer)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
